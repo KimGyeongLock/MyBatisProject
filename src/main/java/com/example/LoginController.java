@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -19,6 +21,7 @@ public class LoginController {
         return "login";
     }
 
+
     @RequestMapping(value = "/loginOk", method = RequestMethod.POST)
     public String loginCheck(HttpSession session, UserVO vo) {
         String returnURL = "";
@@ -29,14 +32,19 @@ public class LoginController {
 
         if (loginvo != null){
             System.out.println("로그인 성공!");
-            
+            session.setAttribute("msg", "로그인 성공!");
+            session.setAttribute("url","../list");
             session.setAttribute("login", loginvo);
-            returnURL = "redirect:/list";
-        }else{
+            //returnURL = "redirect:/list";
+        }else {
             System.out.println("로그인 실패!");
-            returnURL = "redirect:login"; }
-        return returnURL;
+            session.setAttribute("msg", "로그인 실패!");
+            session.setAttribute("url", "./login");
+            //returnURL = "redirect:login";
+        }
+        return "alert";
     }
+
     @RequestMapping(value="/logout")
     public String logout(HttpSession session) {
         session.invalidate();
