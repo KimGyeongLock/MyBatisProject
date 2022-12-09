@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script>location.href="/list"</script>
 </head>
 <body>
 
 <%--<jsp:forward page="/" />--%>
-<a href="/list">이동</a>
 </body>
 </html>
 
